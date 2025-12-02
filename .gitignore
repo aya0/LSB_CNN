@@ -1,0 +1,18 @@
+# Datasets - typically very large
+/data/
+
+# Model checkpoints and output files
+*.h5
+*.pth
+/checkpoints/
+/logs/
+
+# Python environment files (if not using a separate .venv folder)
+__pycache__/
+*.pyc
+
+# Virtual Environment folder
+.venv/
+
+# Operating System files
+.DS_Store
