@@ -6,15 +6,15 @@ model identifies where modifications can be hidden or automatically
 generates stego images with reduced statistical anomalies.
 ****
 
-What We Need To Do \n 
-1- Get images (Normal , stagoimage )\n
-2- Preprocissing image \n
-3- Build CNN modle\n
-4- Train modle\n
-5- Test the modle \n
+## What We Need To Do 
+- Get images (Normal , stagoimage )
+- Preprocissing image 
+- Build CNN modle
+- Train modle
+- Test the modle 
 
 ****
-pre_request to run the project 
-1- python version 3.11.14
+## pre_request to run the project 
+- python version 3.11.14
 ****
 
