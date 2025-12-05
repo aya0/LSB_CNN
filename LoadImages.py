@@ -1,43 +1,36 @@
+import os
 import pickle
+from PIL import Image
 import numpy as np
-from tensorflow.keras.utils import to_categorical
-import matplotlib.pyplot as plt
+
 
 # Function to load CIFAR-100 batch
-def load_cifar100_batch(filename):
+def load_images(filename):
     with open(filename, 'rb') as f:
         data_dict = pickle.load(f, encoding='bytes')
-    images = data_dict[b'data']        # shape: (num_samples, 3072)
-    labels = data_dict[b'fine_labels'] # shape: (num_samples,)
-    # reshape images to (num_samples, 32, 32, 3)
+    images = data_dict[b'data']
     images = images.reshape(-1, 3, 32, 32)
-    images = np.transpose(images, (0, 2, 3, 1))  # channel-last
-    return images, np.array(labels)
+    images = np.transpose(images, (0, 2, 3, 1)) 
+    return images
 
-# Load train and test
-train_images, train_labels = load_cifar100_batch('cifar-100-python/train')
-test_images, test_labels   = load_cifar100_batch('cifar-100-python/test')
+def load_images_to_folder():
+    os.makedirs("images_cifar/train", exist_ok=True)
+    
+    # Save train images to folder
+    for i , img in enumerate(load_images('cifar-100-python/train')):
+        img = Image.fromarray(img)
+        img.save(f"images_cifar/train/{i}.png")
+        
+    # Save test images to folder
+    os.makedirs("images_cifar/test", exist_ok=True)
+    for i , img in enumerate(load_images('cifar-100-python/test')): 
+        img = Image.fromarray(img)
+        img.save(f"images_cifar/test/{i}.png")      
+        
 
-# Normalize images to 0-1
-train_images = train_images.astype('float32') / 255.0
-test_images  = test_images.astype('float32') / 255.0
 
-# Convert labels to one-hot
-train_labels = to_categorical(train_labels, 100)
-test_labels  = to_categorical(test_labels, 100)
-
-print("Train images:", train_images.shape)
-print("Test images:", test_images.shape)
-print("Train labels:", train_labels.shape)
+load_images_to_folder()
 
 
-plt.figure(figsize=(10,10))
 
-for i in range(16):  # show first 16 images
-    plt.subplot(4, 4, i+1)
-    plt.imshow(train_images[i])
-    plt.title(str(np.argmax(train_labels[i])))
-    plt.axis('off')
-
-plt.show()
 
