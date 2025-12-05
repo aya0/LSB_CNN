@@ -3,7 +3,6 @@ import pickle
 from PIL import Image
 import numpy as np
 
-
 # Function to load CIFAR-100 batch
 def load_images(filename):
     with open(filename, 'rb') as f:
