@@ -26,6 +26,8 @@ def process_image_in_folder(input_folderName , output_folderName):
         save_path = os.path.join(output_folderName, img_name)
         cv2.imwrite(save_path, cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
         
-process_image_in_folder("images_cifar/train", "preprocessed_images/train_images_after_preprcessing")        
-process_image_in_folder("images_cifar/test", "preprocessed_images/test_images_after_preprcessing")        
-    
+# process_image_in_folder("images_cifar/train", "preprocessed_images/train_images_after_preprcessing")        
+# process_image_in_folder("images_cifar/test", "preprocessed_images/test_images_after_preprcessing")        
+            
+process_image_in_folder("StagoImages/train", "preprocessed_images/train_stagoimages_after_preprcessing")        
+process_image_in_folder("StagoImages/test", "preprocessed_images/test_stagoimages_after_preprcessing")    
