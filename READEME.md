@@ -28,5 +28,8 @@ generates stego images with reduced statistical anomalies.
 ****
 
 ## how to build the model
+- input the image into the model 
+- model read the images as a array of number (numpy) pixels each pixel have 3 channel (Red , blue , green)
+- Convert the image to binary reprsentation 
 - check LSB (get the pixel and try to find the lsb for pixel)
 -
