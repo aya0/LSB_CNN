@@ -1,6 +1,6 @@
 import cv2
 import numpy as np 
-
+import torch
 
 def Convert_pixel_to_binary(pixel):
     binary_pixel = ""
@@ -17,7 +17,7 @@ def Convert_pixel_to_binary(pixel):
     return binary_pixel
 
 
-def Convert_images_to_array_of_binary(image_path):
+def Convert_images_to_array_of_bit(image_path):
     img_on_bit = []
     # Load the image
     image = cv2.imread(image_path)
@@ -26,6 +26,8 @@ def Convert_images_to_array_of_binary(image_path):
     #  Convert BGR to RGB
     #  make a numPy array ( height , width , channels) 
     img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    
+    H, W, C = img.shape 
     
     print(img) 
     
@@ -38,12 +40,24 @@ def Convert_images_to_array_of_binary(image_path):
             row_in_bits.append(pixel_bits)
         img_on_bit.append(row_in_bits)
     
-    img_on_bit = np.array(img_on_bit)
-    print (img_on_bit)     
+    # Convert img_on_bit to a NumPy array   
+    bit_array = np.array(img_on_bit, dtype=np.uint8)
+
+    # Flatten channel bits → [H, W, 24]
+    bit_array = bit_array.reshape(H, W, C * 8)
+    
+
+    # Transpose to [channels, H, W] for PyTorch
+    bit_tensor = torch.tensor(bit_array, dtype=torch.float32).permute(2, 0, 1)
+
+    return  bit_tensor  
             
-        
-        
-Convert_images_to_array_of_pixel("preprocessed_images/train_images_after_preprcessing/0.png")
+            
+print(Convert_images_to_array_of_bit("preprocessed_images/train_images_after_preprcessing/0.png"))
+
+
+
+
     
         
        
