@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import Dataset
-from LSB_model import Convert_images_to_array_of_bit
+from convert_image_bit import Convert_images_to_array_of_bit
 
 
 class LabelImages(Dataset):
